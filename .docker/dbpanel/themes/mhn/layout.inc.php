@@ -71,7 +71,7 @@ $GLOBALS['cfg']['BrowsePointerBackground']  = '#cfc';
 $GLOBALS['cfg']['BrowseMarkerColor']        = '#000';
 $GLOBALS['cfg']['BrowseMarkerBackground']   = '#fc9';
 
-$GLOBALS['cfg']['FontFamily']       = '"Roboto","Open Sans","Segoe UI Light","Segoe UI",sans-serif;';
+$GLOBALS['cfg']['FontFamily']       = '"Noto Sans","Roboto","Open Sans","Segoe UI Light","Segoe UI",sans-serif';
 $GLOBALS['cfg']['FontFamilyFixed']  = 'monospace,"Lucida Console","Courier New"';
 
 $GLOBALS['cfg']['ThBackground']     = '#D3DCE3';
