@@ -1,0 +1,7 @@
+.docker/**
+.env
+
+!*/
+!.docker/dbpanel/locale/th/**
+!.docker/dbpanel/themes/mhn/**
+!.docker/dbpanel/config.inc.php
