@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  database:
+    image: mariadb:10.3 
+    container_name: sitkmutt-it59-23_database_dev
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=${DB_COLLATION}']
+    networks:
+      - network
+    ports:
+      - ${DB_PORT}:3306
+    restart: "no"
+    volumes:
+      - database:/var/lib/mysql/
+  dbpanel:
+    image: phpmyadmin/phpmyadmin:4.8
+    container_name: sitkmutt-it59-23_dbpanel_dev
+    depends_on:
+      - database
+    environment:
+      - PMA_VERBOSE=IT59-23 - Development Database
+      - PMA_HOST=database
+      - PMA_PORT=3306
+    links:
+      - database
+    networks:
+      - network
+    ports:
+      - ${DBPANEL_PORT}:80
+    restart: "no"
+    volumes:
+      - /sessions
+      - ./.docker/dbpanel/:/var/www/html/
+  storage:
+    image: minio/minio
+    container_name: sitkmutt-it59-23_storage_dev
+    environment:
+      - MINIO_ACCESS_KEY=${MINIO_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET}
+    entrypoint: sh
+    command: -c 'mkdir -p /export/${MINIO_BUCKET} && /usr/bin/minio server /export'
+    networks:
+      - network
+    ports:
+      - ${MINIO_PORT}:9000
+    restart: "no"
+    volumes:
+      - storage:/export
+
+networks:
+  network:
+   name: sitkmutt-it59-23_data-network_dev
+
+volumes:
+  database:
+    name: sitkmutt-it59-23_data-database-volume_dev
+  storage:
+    name: sitkmutt-it59-23_data-storage-volume_dev
