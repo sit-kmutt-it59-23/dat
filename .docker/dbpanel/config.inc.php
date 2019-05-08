@@ -3,3 +3,4 @@
 
 $cfg['DefaultLang'] = 'en';
 $cfg['ThemeDefault'] = 'mhn';
+$cfg['PmaNoRelation_DisableWarning'] = true;
